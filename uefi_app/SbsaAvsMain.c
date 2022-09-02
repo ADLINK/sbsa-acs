@@ -27,6 +27,7 @@
 #include "val/include/sbsa_avs_pe.h"
 #include "val/include/sbsa_avs_val.h"
 
+#include <Library/UefiRuntimeServicesTableLib.h>
 #include "SbsaAvs.h"
 
 UINT32 g_pcie_p2p;
@@ -561,6 +562,7 @@ print_test_status:
 
   Print(L"\n      *** SBSA tests complete. Reset the system. *** \n\n");
 
+  gRT->ResetSystem (EfiResetCold, EFI_SUCCESS, 0, NULL);
   val_pe_context_restore(AA64WriteSp(g_stack_pointer));
 
   return(0);
